@@ -12,7 +12,7 @@ provider "google" {
   project = "microservices-463006"
   # terraform gcp service account key file
   # This file should be downloaded from the GCP console and should not be committed to version control.
-  # credentials = "cryptic-form-463004-u8-a4c2099fd396.json"
+  credentials = "microservices-463006-621b97fb5092.json"
 }
 
 
