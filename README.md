@@ -40,7 +40,9 @@ gcloud components install gke-gcloud-auth-plugin
 
 gcloud container clusters get-credentials mircoservices-gke-cluster --region us-central1 --project microservices-463006
 
-kubectl apply -f deployment.yml
+# kubectl apply -f deployment.yml
+export DEPLOY_IMG="ghcr.io/hasanfarag199/microservice-app:latest"
+envsubst < deployment.yml | kubectl apply -f -
 kubectl apply -f service.yml
 # 4. Expose Service to internet with LB
 
