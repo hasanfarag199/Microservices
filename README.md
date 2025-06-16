@@ -41,10 +41,11 @@ gcloud components install gke-gcloud-auth-plugin
 gcloud container clusters get-credentials mircoservices-gke-cluster --region us-central1 --project microservices-463006
 
 kubectl apply -f deployment.yml
-
+kubectl apply -f service.yml
 # 4. Expose Service to internet with LB
 
-kubectl apply -f service.yml
+curl http://34.72.136.181/products
+[{"id":1,"name":"Laptop"},{"id":2,"name":"Smartphone"}]
 
 # 5. CI/CD [Implement a CI/CD pipeline to automate the build and deployment process].
 check github actions workflow as ci_cd.yml
