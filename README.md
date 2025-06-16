@@ -1,3 +1,4 @@
+[![Build and Deploy to GKE](https://github.com/hasanfarag199/Microservices/actions/workflows/gke_cd.yml/badge.svg)](https://github.com/hasanfarag199/Microservices/actions/workflows/gke_cd.yml)
 # 1. Docker
 docker build -t microservice-app .
 
