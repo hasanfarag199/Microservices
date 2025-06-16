@@ -51,11 +51,10 @@ jobs:
     - name: replace variables in deployment.yaml
       run: |-
          export DEPLOY_IMG="us-central1-docker.pkg.dev/${{ secrets.GKE_PROJECT }}/${{ vars.IMAGE_REPO }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG}}"
-         sudo apt-get update && sudo apt-get install -y gettext-base
 
     - name: Deploy
       run: |-
-        envsubst < deployment.yaml | kubectl apply -f -
+        envsubst < deployment.yml | kubectl apply -f -
         kubectl apply -f service.yml
     
     # - name: Wait for deployment to complete
