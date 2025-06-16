@@ -27,7 +27,7 @@ jobs:
     # Authenticate Docker to use Google Container Registry
     - name: Docker configuration
       run: |-
-        gcloud --quiet auth configure-docker
+        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
 
     # Build the Docker image
     - name: Build
@@ -42,10 +42,15 @@ jobs:
     - name: Publish
       run: |-
         docker push "us-central1-docker.pkg.dev/${{ secrets.GKE_PROJECT }}/${{ vars.IMAGE_REPO }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG}}"
-    
+    - name: replace variables in deployment.yaml
+      run: |-
+         export DEPLOY_IMG="us-central1-docker.pkg.dev/${{ secrets.GKE_PROJECT }}/${{ vars.IMAGE_REPO }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG}}"
+         apt-get -y install getext-base
+
     - name: Deploy
       run: |-
-        kubectl apply -f deployment.yml
+
+        envsubst < deployment.yaml | kubectl apply -f -
         kubectl apply -f service.yml
     
     # - name: Wait for deployment to complete
