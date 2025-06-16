@@ -1,0 +1,6 @@
+__*
+*.json
+*.tfstate.*
+*.tfstate
+*.terraform.*
+.terraform
