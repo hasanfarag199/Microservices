@@ -37,7 +37,13 @@ jobs:
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
-
+    - name: Create Artifact Registry repository if not exists
+      run: |
+          gcloud artifacts repositories describe microservice-repo --location=us-central1 || \
+          gcloud artifacts repositories create microservice-repo \
+            --repository-format=docker \
+            --location=us-central1 \
+            --description="Docker repository"
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
