@@ -56,9 +56,6 @@ jobs:
         envsubst < deployment.yml | kubectl apply -f -
         kubectl apply -f service.yml
     
-    # - name: Wait for deployment to complete
-    #   run: |-
-    #     kubectl rollout status deployment/${{ vars.IMAGE }} --timeout=600s
     - name: Test deployment
       run: |-
         curl http://34.72.136.181/products
