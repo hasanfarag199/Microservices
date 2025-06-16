@@ -26,13 +26,13 @@ jobs:
     
     - name: Docker configuration
       run: |-
-        gcloud --quiet auth configure-docker
-        # gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://{{ vars.GKE_ZONE }}-docker.pkg.dev
+        # gcloud --quiet auth configure-docker
+        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://{{ vars.GKE_ZONE }}-docker.pkg.dev
     
      # Build the Docker image
     - name: Build
       run: |-
-        docker buildx build \
+        docker build \
           --tag "gcr.io/${{ secrets.GKE_PROJECT }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG}}"
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_SHA" \
