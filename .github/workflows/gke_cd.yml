@@ -33,7 +33,7 @@ jobs:
     - name: Build
       run: |-
         docker build \
-          --tag "${{ vars.GKE_ZONE }}-docker.pkg.dev/${{ secrets.GKE_PROJECT }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG}}" \
+          --tag "${{ vars.GKE_ZONE }}-docker.pkg.dev/${{ secrets.GKE_PROJECT }}/${{ vars.IMAGE_REPO }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG}}" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
