@@ -1,10 +1,10 @@
-# build the docker image
+# Docker
 docker build -t microservice-app .
-# test the docker container
 docker run -it -p 5000:5000 microservice-app
-
-# infra
+# GCP
+Create a service account with Role "Kubernetes Engine Cluster Admin" and Generate a key.json to authenticate terraform to gcp api
+Enable "Kubernetes Engine API" for the associated project
+# Terraform
 terraform init
-export IC_API_KEY="h-jvm1Q4hZbs1xt-9Zfrs0g2W-2exPR2i3q_864O3jD9"
-terraform plan
+terraform plan 
 terraform apply
