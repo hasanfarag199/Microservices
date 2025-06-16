@@ -25,14 +25,26 @@ echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 
 docker push ghcr.io/hasanfarag199/microservice-app:latest
 
-## Install gcp cli at https://cloud.google.com/sdk/docs/install#deb
+
+sudo apt-get install google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin 
+## https://cloud.google.com/sdk/docs/install#deb
+## https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#install_plugin
+
+gcloud auth login --no-launch-browser
+
+## Enter the verification code in gcloud CLI on the machine you want to log into
+
+gcloud config set project microservices-463006
+
+gcloud components install gke-gcloud-auth-plugin
 
 gcloud container clusters get-credentials mircoservices-gke-cluster --region us-central1 --project microservices-463006
 
-kubectl apply -f deployment.yaml
+kubectl apply -f deployment.yml
 
 # 4. Expose Service to internet with LB
 
-kubectl apply -f service.yaml
+kubectl apply -f service.yml
 
 # 5. CI/CD [Implement a CI/CD pipeline to automate the build and deployment process].
+check github actions workflow as ci_cd.yml
