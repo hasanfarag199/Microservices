@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   cd:
-    name: Setup, Build, Publish, and Deploy
+    name: Setup, Build, Publish, and Deploy App to GKE
     runs-on: ubuntu-latest
     environment: production
 
@@ -34,7 +34,8 @@ jobs:
       run: |-
         docker build \
           --tag "gcr.io/${{ secrets.GKE_PROJECT }}/${{ vars.IMAGE }}"
-          --build-arg GITHUB_REF="$GITHUB_REF" \
+          --build-arg GITHUB_SHA="${{ github.sha }}" \
+          --build-arg GITHUB_REF="${{ github.ref }}" \
           .
 
     # # Push the Docker image to Google Container Registry
