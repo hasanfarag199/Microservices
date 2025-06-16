@@ -13,8 +13,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    # Setup gcloud CLI
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v2.1.10'
+    - name: Setup gcloud CLI
+      uses: google-github-actions/auth@v2.1.10
       with:
         credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+    - name: Get the GKE credentials
+      uses: google-github-actions/get-gke-credentials@v2.3.3
+      with:
+        cluster_name: ${{ vars.GKE_CLUSTER }}
+        location: ${{ vars.GKE_ZONE }}
